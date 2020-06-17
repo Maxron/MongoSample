@@ -32,7 +32,7 @@ It include two structure:
 - `make down`
 
 ----
-### ReplicaSet
+## ReplicaSet
 
 [ReplicaSet Document](https://docs.mongodb.com/manual/replication/)  
 
@@ -108,3 +108,11 @@ $ make rs-add-nodes
 ```bash
 $ make rs-status
 ```
+
+### Other command
+
+- `make restart`
+- `make stop`
+
+**Caustion!! This Command will remove container**
+- `make rs-down`

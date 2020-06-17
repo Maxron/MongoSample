@@ -26,7 +26,7 @@ restart: $(TARGET_ENTRYPOINT_SH)
 	docker-compose -f $(DOCKER_COMPOSE_FILE) restar
 
 stop: $(TARGET_ENTRYPOINT_SH)
-	docker-compose -f $(TARGET_ENTRYPOINT_SH) stop
+	docker-compose -f $(DOCKER_COMPOSE_FILE) stop
 
 down: $(TARGET_ENTRYPOINT_SH)
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down
@@ -64,3 +64,11 @@ rs-add-nodes:
 .PHONY: rs-status
 rs-status:
 	docker exec -ti $(CONTAINER_NAME) mongo admin --host localhost -u $(MONGO_INITDB_ROOT_USERNAME) -p $(MONGO_INITDB_ROOT_PASSWORD) --eval "rs.status()"
+
+.PHONY: rs-restart
+rs-restart:
+	docker-compose -f $(DOCKER_COMPOSE_REPL_FILE) restart
+
+.PHONY: rs-stop
+rs-stop:
+	docker-compose -f $(DOCKER_COMPOSE_REPL_FILE) stop 
