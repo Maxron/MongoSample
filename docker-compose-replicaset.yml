@@ -1,0 +1,25 @@
+version: '3.5'
+services:
+  mongo-container:
+    image: mongo:3.6
+    container_name: ${CONTAINER_NAME} 
+    restart: always
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+        - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - ${DOCKER_EXTERNAL_PORT}:27017
+    volumes:
+      - ${MONGO_DATA_PATH}:/data/db
+      - ./config/mongo-entrypoint/:/docker-entrypoint-initdb.d/
+      - ./${MONGO_KEYFILE_NAME}:/resource/mongodb-rs.key
+      - ./config/hosts:/resource/hosts
+    command: mongod  --auth --replSet "${MONGO_REPL_NAME}" --keyFile /resource/mongodb-rs.key
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    external:
+      name: mongo-test
+

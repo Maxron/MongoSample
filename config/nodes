@@ -1,0 +1,5 @@
+# Mongo Replica Set Add Nodes 
+#
+# RS_NODES="rs.add('rs2:27017');rs.add('rs3:27017')"
+
+RS_NODES="rs.add('rs2:27017');rs.add('rs3:27017')"
